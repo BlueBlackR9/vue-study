@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>todoList拆分为组件</title>
+    <script src="./vue.js"></script>
+  </head>
+  <body>
+      <div id="root">
+          <div>
+            <input v-model="inputValue" />
+            <button @click="handleSubmit">提交</button>
+          </div>
+          <ul>
+              <!-- 调用组件 -->
+              <todo-item v-for="(item, index) of list" :key="index" :content="item">
+              </todo-item>
+          </ul>
+      </div>
+
+
+    <script>
+
+        // 全局组件
+        Vue.component('todo-item', {
+            props: ['content'], //接收参数,名称可以自定义，类似与Java方法里的形参
+            template: '<li>{{content}}</li>' //模板
+        })
+
+        new Vue({
+            el: "#root",
+            data: {
+                inputValue: '',
+                list: []
+            },
+            methods: {
+                handleSubmit : function() {
+                  this.list.push(this.inputValue)
+                  this.inputValue = ''
+                }
+            }
+        })
+    </script>
+  </body>
+</html>
