@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>v-if, v-show, v-for指令</title>
+    <script src="./vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+        <!-- v-if值为false时，v-if所在的dom标签会从html页面中删除掉，以达到效果 -->
+        <!-- v-if：控制dom的存在与否-->
+        <div v-if="show"><h1>hello world</h1></div>
+        <!-- v-show值为false时，v-show所在的dom标签会添加一个style="display:none"隐藏样式，具体而已通过F12查看，以达到效果 -->
+        <!-- v-show：控制dom的显示与否-->
+        <div v-show="show"><h1>hello world</h1></div>
+        <button @click="handleClick">点击我</button>
+
+        <!-- v-for：循环展示 -->
+        <ul>
+            <li v-for="item of list">{{item}}</li>
+        </ul>
+
+        <!-- 通过:可以提高效率，但是需要注意的是，key值得是唯一的-->
+        <ul>
+            <li v-for="item of list" :key="item">{{item}}</li>
+        </ul>
+
+        <!-- 用下标当作key，这种方法具体查一下，也有弊端-->
+        <ul>
+            <li v-for="(item, index) of list" :key="index">{{item}}</li>
+        </ul>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#root",
+            data: {
+                show: true,
+                list: [1,2,3,4]
+            },
+            methods: {
+                handleClick : function() {
+                    this.show = !this.show
+                }
+            }
+
+        })
+    </script>
+  </body>
+</html>
